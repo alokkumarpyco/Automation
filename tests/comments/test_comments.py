@@ -2,7 +2,7 @@ import requests
 import pytest
 from common_libs.utils import build_request_headers
 from common_libs.comments import Comments
-from config import APP_URL
+from config import APP_URL, LOG
 import logging
 
 
@@ -10,7 +10,13 @@ import logging
 
 def test_get_all_comments(login_as_admin):
     response = Comments().get_all_comments(f"{APP_URL}", login_as_admin)
-    logging.info("Test of Logging")
+    LOG.info("Test of Logging")
+    assert response.ok
+
+
+def test_create_comment(login_as_admin):
+    response = Comments().create_comment(f"{APP_URL}", login_as_admin, "This is something")
+    LOG.info("Logging create comment")
     assert response.ok
 
 
