@@ -1,11 +1,10 @@
-import requests
 import pytest
-from config import SESSION,APP_URL,ADMIN_USER,ADMIN_PASSWD
-
+import requests
+from config import SESSION, APP_URL, ADMIN_USER, ADMIN_PASSWORD, LOG
 
 @pytest.fixture(scope="session")
 def login_as_admin():
-    payload = {"username": ADMIN_USER, "password": ADMIN_PASSWD}
+    payload = {"username": ADMIN_USER, "password": ADMIN_PASSWORD}
     response = SESSION.post(f"{APP_URL}/auth/login", data=payload)
     assert response.ok
 
